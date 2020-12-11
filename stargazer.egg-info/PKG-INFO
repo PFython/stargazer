@@ -1,0 +1,47 @@
+Metadata-Version: 2.1
+Name: stargazer
+Version: 0.1
+Summary: Utility to crape emails and names of Github users ('Stargazers') who have starred a particular repository.  Includes a general purpose Repository class and (Github) User class.
+Home-page: https://github.com/Pfython/stargazer
+Author: Peter Fison
+Author-email: peter@southwestlondon.tv
+License: MIT License
+Download-URL: https://github.com/Pfython/stargazer/archive/0.1.tar.gz
+Description: # `stargazer`
+        ![Replace with your own inspirational logo here](https://github.com/PFython/easypypi/blob/main/easypypi.png?raw=true)
+        Utility to crape emails and names of Github users (\'Stargazers\') who have starred a particular repository.  Includes a general purpose Repository class and (Github) User class.
+        ### OVERVIEW
+        
+        ### INSTALLATION
+        
+        ```
+        pip install stargazer
+        ```
+        
+        ### BASIC USE
+        
+        ```
+        import stargazer
+        ```
+        
+        ### UNDER THE BONNET
+        
+        ### CONTRIBUTING
+        
+        Contact Peter Fison
+        
+        peter@southwestlondon.tv
+        
+        ### CREDITS
+        
+Keywords: stargazer,Github,stars,scraper,email,selenium
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Communications :: Email
+Description-Content-Type: text/markdown

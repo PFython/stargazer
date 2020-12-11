@@ -1,0 +1,5 @@
+cleverdict
+pysimplegui
+selenium
+bs4
+pyperclip
