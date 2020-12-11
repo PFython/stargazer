@@ -6,7 +6,7 @@ from setuptools import setup
 NAME = "stargazer"
 GITHUB_USERNAME = "Pfython"
 VERSION = "0.1"
-DESCRIPTION = "Utility to scrape emails and names of Github users  who have starred a particular repository ('Stargazers').  Includes a general purpose Repository class and (Github) User class."
+DESCRIPTION = "Utility to crape emails and names of Github users ('Stargazers') who have starred a particular repository.  Includes a general purpose Repository class and (Github) User class."
 LICENSE = "MIT License"
 AUTHOR = "Peter Fison"
 EMAIL = "peter@southwestlondon.tv"
