@@ -68,16 +68,16 @@ setattr(CleverDict, "to_json", to_json)
 
 class User(CleverDict):
     index = []
-    def __init__(self, user_name, **kwargs):
-        # user_name format can be:
+    def __init__(self, name, **kwargs):
+        # name format can be:
         # "Pfython" or "https://github.com/PFython"
         super().__init__(**kwargs)
-        self.user_name = user_name.split("/")[-1]
+        self.name = name.split("/")[-1]
         User.index.append(self)
 
     @property
     def url(self):
-        return f"https://github.com/{self.user_name}"
+        return f"https://github.com/{self.name}"
 
 class Repository(CleverDict):
     index = []
