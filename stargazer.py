@@ -166,9 +166,8 @@ def start_gui(**kwargs):
 
 @timer
 def get_input():
-    global repo_url, username, password
+    global repo_url, repo, username, password
     repo_url = "https://github.com/qmasingarbe/pymiere"
-    global repo
     repo = Repository(sg.popup_get_text("Please enter a Repository ID in the format 'user_name/repo_name':", default_text=globals().get("repo_url"), **sg_kwargs))
     username = sg.popup_get_text(f"Please enter your GitHub username: ", default_text=globals().get("username"), **sg_kwargs,)
     password = sg.popup_get_text(f"Please enter your GitHub password: ", password_char="*", default_text=globals().get("password"), **sg_kwargs,)
@@ -226,7 +225,11 @@ def start():
     start_webbrowser()
     loop_through_stargazers()
     loop_through_profiles()
-    return repo.emails(copy=True)
+    return repo
+
+if __name__ == "__main__":
+    start()
+
 
 # TODO: Repository.save_file
 # TODO: Get websites, look for obvious contact email

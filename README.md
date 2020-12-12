@@ -16,19 +16,26 @@ Clone/Fork/Download etc. from https://github.com/PFython/stargazer.
 # Enter your Github username and password, and the repository to scrape
 # Wait for selenium to do its thing...
 
-# When you see the command prompt again, you can get all emails with:
+# When you see the command prompt again, you can find your repository data (and any other repositories you've createed in the same session) in `Repository.index`:
+
+>>> Respository.index.keys()
+dict_keys(['qmasingarbe/pymiere'])
+
+>>> repo = Repository.index['qmasingarbe/pymiere']
+
+From there you can access all the repository attributes, methods, and properties e.g.
 >>> repo.emails()
 
-# And optionally change the separator and/or save to the clipboard:
->>> repo.emails(copy=True, separator=",")
+# The `emails` and `Twitter` methods allow you to change the separator and/or save to the clipboard:
+>>> repo.twitter(copy=True, separator=",")
 
-# User information can easily be obtained with list comprehensions:
->>> [user.name for user in repo.stargazers]
+# Stargazer information for a particular repository can easily be obtained with list comprehensions:
+>>> [user.name for user in repo.stargazers.values()]
 
-# A list of all Repositories and Users is kept in .index
->>> [user.url for user in User.index]
+# And the `User` class has its own `.index` just like the `Repository` class:
+>>> [user.url for user in User.index.values()]
 ...
->>> [repository.stargazers_url for repository in Repository.index]
+>>> [repository.stargazers_url for repository in Repository.index.values()]
 
 ```
 
@@ -38,6 +45,8 @@ Clone/Fork/Download etc. from https://github.com/PFython/stargazer.
 `chomedriver.exe` is included in this repository but you can replace with the relevant `selenium` web-driver for your preferred browser.  Please see `selenium` docs/tutorials widely available elsewhere.
 
 Hopefully `stargazer` will be of interest to people getting started with `selenium` and web scraping generally.  It's not super elegant or even PEP8 compliant, but does show how a simple web scraping challenge can be met quickly, understandably, and extensibly.
+
+Earlier versions of `stargazer` used `BeautifulSoup` but with a little extra work I'm please to say it now works using just `selenium`.
 
 # 5. CONTRIBUTING
 
