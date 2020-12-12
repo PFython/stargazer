@@ -11,6 +11,7 @@ Clone/Fork/Download etc. from https://github.com/PFython/stargazer.
 
 ```
 >>> from stargazer import *
+>>> start()
 
 # Enter your Github username and password, and the repository to scrape
 # Wait for selenium to do its thing...
