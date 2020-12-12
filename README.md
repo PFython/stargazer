@@ -9,35 +9,37 @@ Clone/Fork/Download etc. from https://github.com/PFython/stargazer.
 
 # 3. BASIC USE
 
-```
->>> from stargazer import *
->>> start()
 
-# Enter your Github username and password, and the repository to scrape
-# Wait for selenium to do its thing...
+    >>> from stargazer import *
+    >>> start()
 
-# When you see the command prompt again, you can find your repository data (and any other repositories you've createed in the same session) in `Repository.index`:
+Enter your Github username and password, and the repository to scrape.  Wait for selenium to do its thing...
 
->>> Respository.index.keys()
-dict_keys(['qmasingarbe/pymiere'])
+When you see the command prompt again, you can find your repository data (and any other repositories you've createed in the same session) in `Repository.index`:
 
->>> repo = Repository.index['qmasingarbe/pymiere']
+    >>> Respository.index.keys()
+    dict_keys(['qmasingarbe/pymiere'])
 
-From there you can access all the repository attributes, methods, and properties e.g.
->>> repo.emails()
+    >>> repo = Repository.index['qmasingarbe/pymiere']
 
-# The `emails` and `Twitter` methods allow you to change the separator and/or save to the clipboard:
->>> repo.twitter(copy=True, separator=",")
+From there you can access all the repository attributes, methods, & properties e.g.
 
-# Stargazer information for a particular repository can easily be obtained with list comprehensions:
->>> [user.name for user in repo.stargazers.values()]
+    >>> repo.emails()
 
-# And the `User` class has its own `.index` just like the `Repository` class:
->>> [user.url for user in User.index.values()]
-...
->>> [repository.stargazers_url for repository in Repository.index.values()]
+The `emails` and `twitter` methods allow you to change the separator and/or save to the clipboard:
 
-```
+    >>> repo.twitter(copy=True, separator=",")
+
+Stargazer information for a particular Repository can easily be obtained with list comprehensions:
+
+    >>> [user.name for user in repo.stargazers.values()]
+
+And the `User` class has its own `.index` just like the `Repository` class:
+
+    >>> [user.url for user in User.index.values()]
+    ...
+    >>> [repository.stargazers_url for repository in Repository.index.values()]
+
 
 # 4. UNDER THE BONNET
 `stargazer` uses `selenium` and `cleverdict` behind the scenes, and `PySimpleGUI` for input prompts.

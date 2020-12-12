@@ -228,6 +228,7 @@ def start():
 
 if __name__ == "__main__":
     start()
+    repo = list(Repository.index.values())[0]
 
 
 # TODO: Repository.save_file
