@@ -225,7 +225,6 @@ def start():
     start_webbrowser()
     loop_through_stargazers()
     loop_through_profiles()
-    return repo
 
 if __name__ == "__main__":
     start()
