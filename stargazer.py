@@ -156,18 +156,21 @@ def save(self, name, value):
 def start_gui(**kwargs):
     """
     Toggles between normal output and routing stdout/stderr to PySimpleGUI
+
+    redirect: send (almost) all stdout/stderr to Debug Window & replace print()
     """
-    if kwargs.get("redirect"):
-        global print
-        print = sg.Print
     sg.change_look_and_feel("DarkAmber")
     # Redirect stdout and stderr to Debug Window:
     sg.set_options(
         message_box_line_width=80,
         debug_win_size=(100, 30),
     )
-    options = {"do_not_reroute_stdout": False, "keep_on_top": True}
-
+    if kwargs.get("redirect"):
+        global print
+        print = sg.Print
+        options = {"do_not_reroute_stdout": False, "keep_on_top": True}
+        print(**options)
+        print("Rerouting stdout/stderr to PySimpleGUI Debug Window...")
 @timer
 def get_input():
     Session.repo = Repository(sg.popup_get_text("Please enter a Repository ID in the format 'user_name/repo_name':", default_text=Session.repo_url, **Session.kwargs))
