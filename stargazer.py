@@ -43,7 +43,7 @@ class Repository(CleverDict):
         """
         super().__init__(**kwargs)
         try:
-            user_name, repo_name = full_name.split("/")[-2:]
+            user_name, repo_name = full_name.lower().split("/")[-2:]
             self.title = "Github Repository"
             self.id = f"{user_name}/{repo_name}"
             self.user_name, self.repo_name = self.id.split("/")
