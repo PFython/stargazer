@@ -104,7 +104,7 @@ class Repository(CleverDict):
 
 class Session:
     repo_url = "https://github.com/qmasingarbe/pymiere"
-    kwargs = {"title": "User", "keep_on_top": True,}  # PySimpleGUI options
+    kwargs = {"title": "stargazer", "keep_on_top": True, "icon": "stargazer.ico"}  # PySimpleGUI options
     dirpath = Path().cwd()
     username = ""
     password = ""
@@ -233,10 +233,15 @@ def start():
 
 if __name__ == "__main__":
     start()
-    repo = list(Repository.index.values())[0]
+    Session.repo.save_file()
+    Session.repo.emails(copy=True)
+    print("\n ✓  Emails copied to clipboard.")
 
 
-# TODO: Repository.save_file
+# TODO: GUI progress bar
+# TODO: Multi-threading for greater speed
+# TODO: Load repository from JSON
+# TODO: User exclude list (e.g. deliberately invalid email addresses)
 # TODO: Get websites, look for obvious contact email
 # TODO: Auto-generate email based on template and repo.emails
 
