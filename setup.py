@@ -7,14 +7,14 @@ from setuptools import setup
 
 NAME = "stargazer"
 GITHUB_USERNAME = "Pfython"
-VERSION = "0.2"
+VERSION = "0.21"
 DESCRIPTION = "Utility to crape emails and names of Github users ('Stargazers') who have starred a particular repository.  Includes a general purpose Repository class and (Github) User class."
 LICENSE = "MIT License"
 AUTHOR = "Peter Fison"
 EMAIL = "peter@southwestlondon.tv"
 URL = "https://github.com/Pfython/stargazer"
 KEYWORDS = "stargazer, Github, stars, scraper, email, selenium"
-CLASSIFIERS = "Development Status :: 4 - Beta, Intended Audience :: Developers, Operating System :: OS Independent, Programming Language :: Python :: 3.6, Programming Language :: Python :: 3.7, Programming Language :: Python :: 3.8, Programming Language :: Python :: 3.9, Topic :: Communications :: Email"
+CLASSIFIERS = ""
 REQUIREMENTS = "cleverutils"
 
 
