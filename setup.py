@@ -15,7 +15,7 @@ EMAIL = "peter@southwestlondon.tv"
 URL = "https://github.com/Pfython/stargazer"
 KEYWORDS = "stargazer, Github, stars, scraper, email, selenium"
 CLASSIFIERS = "Development Status :: 4 - Beta, Intended Audience :: Developers, Operating System :: OS Independent, Programming Language :: Python :: 3.6, Programming Language :: Python :: 3.7, Programming Language :: Python :: 3.8, Programming Language :: Python :: 3.9, Topic :: Communications :: Email"
-REQUIREMENTS = "cleverdict, pysimplegui, selenium, bs4, pyperclip"
+REQUIREMENTS = "cleverutils"
 
 
 def comma_split(text: str):

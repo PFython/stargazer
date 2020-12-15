@@ -47,13 +47,11 @@ If you want to scrape another `Repository`, just use the `start()` function agai
 
 
 # 4. UNDER THE BONNET
-`stargazer` uses `selenium` for web-scraping, `cleverdict` for data management, and `PySimpleGUI` for quick and easy input prompts.
+`stargazer` is a proof of concept for building on the author's small but handy library [`cleverutils`](https://github.com/Pfython/cleverutils).  This in turn uses [`selenium`](https://github.com/SeleniumHQ/selenium/tree/trunk/py) for web-scraping, [`cleverdict`](https://github.com/PFython/cleverdict) for data management, and [`PySimpleGUI`](https://github.com/PySimpleGUI) for quick and easy input prompts.
 
-`chomedriver.exe` is included in this repository but you can replace with the latest `selenium` web-driver for your preferred browser.  Please see `selenium` docs/tutorials widely available elsewhere.
+`chomedriver.exe` is included in this repository but you should replace it with the latest `selenium` web-driver for your preferred browser (and add to your PATH).  Please see `selenium` docs/tutorials widely available elsewhere.
 
-
-
-Earlier versions of `stargazer` used `BeautifulSoup` but with a little extra work I'm please to say it now works using just `selenium`.
+Earlier versions of `stargazer` were much more bloated and included `BeautifulSoup` which is no longer required.  This proof of concept "lifted" much of the generic features into `cleverutils` and effectively creates a micro-framework for web automations and scraping that's pretyy lightweight and easy to understand.
 
 # 5. CONTRIBUTING
 
