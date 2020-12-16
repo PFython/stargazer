@@ -1,24 +1,16 @@
 """
 Finds Github "Stargazers" (people who have starred a particular repository) and scrapes their email address, name, and Twitter handle if published.
 """
+from cleverutils.cleverutils.clevergui import progress_bar
 from cleverutils import CleverSession
-import os
-from pathlib import Path
 from cleverdict import CleverDict
-import pyperclip
-from selenium.common.exceptions import WebDriverException
 from cleverutils.clevergui import text_input, get_folder
 from cleverutils.cleverutils import to_json, timer, get_time, list_batches
-from cleverutils.cleverwebutils import Login_to
-
+import os
+from pathlib import Path
+import pyperclip
+from selenium.common.exceptions import WebDriverException
 import threading
-from selenium import webdriver
-from itertools import islice
-from selenium.webdriver.chrome.options import Options
-
-chrome_options = Options()
-chrome_options.add_argument('--headless')
-chrome_options.add_argument('--log-level=3')
 
 class User(CleverDict):
     index = {}
@@ -153,7 +145,10 @@ class Session(CleverSession):
         Uses the supplied browser to gather details from user profile pages.
         """
         browser.implicitly_wait(0)
-        for user in user_group:
+        index = 0
+        size = len(list(user_group))
+        window = progress_bar(f"Scraping page {index} of {size}:\n{browser.current_url.split('?')[0]}")
+        for index, user in enumerate(user_group):
             browser.get(user.url)
             # GET EMAIL / TWITTER
             at = browser.find_elements_by_partial_link_text("@")
@@ -169,6 +164,9 @@ class Session(CleverSession):
             span = browser.find_elements_by_tag_name("span")
             user.name = [x.text for x in span if x.get_attribute('itemprop')=="name"][0]
             user.last_updated = get_time()
+            index += 1
+            window['progress'].update(index, size)
+            window['progress_text'].update(f"Scraping page {index} of {size}:\n{browser.current_url.split('?')[0]}")
         browser.close()
 
 @timer
