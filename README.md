@@ -7,9 +7,13 @@
 
 Clone/Fork/Download etc. from https://github.com/PFython/stargazer.
 
+Then:
+
+    pip install cleverutils
+
 # 3. BASIC USE
 
-    >>> from stargazer import start, Session
+    >>> from stargazer import main, Session
     >>> start()
 
 Enter your Github username and password, and the repository to scrape.  Wait for selenium to do its thing...
