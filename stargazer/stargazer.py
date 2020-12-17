@@ -1,7 +1,7 @@
 """
 Finds Github "Stargazers" (people who have starred a particular repository) and scrapes their email address, name, and Twitter handle if published.
 """
-from cleverutils.cleverutils.clevergui import progress_bar
+from cleverutils import progress_bar
 from cleverutils import CleverSession
 from cleverdict import CleverDict
 from cleverutils.clevergui import text_input, get_folder
@@ -128,28 +128,43 @@ class Session(CleverSession):
     def loop_through_profiles(self, **kwargs):
         downloadThreads = []
         group = list_batches(self.repo.stargazers.values(), **kwargs)
+        self.progress_counter = 0
+        self.setattr_direct("current_page", "Preparing to start scraping...")
+        job_size = len(self.repo.stargazers)
+        self.progress_window = progress_bar()
+        browser=iter(self.browsers)
         try:
             while True:
-                user_group = next(group)
-                downloadThread = threading.Thread(target=self.scrape, args=[user_group, self.browsers.pop()])
+                user_group = list(next(group))
+                downloadThread = threading.Thread(target=self.scrape, args=[user_group, next(browser)])
                 downloadThreads.append(downloadThread)
                 downloadThread.start()
         except StopIteration:
             print("\n  ⓘ Last browser group starting now...")
-        finally:
-            for downloadThread in downloadThreads:
-                downloadThread.join()
+            while self.progress_counter <= job_size:
+                self.progress_window['progress_bar'].update(self.progress_counter, job_size)
+                self.progress_window['progress_text'].update(f"Scraping profile {self.progress_counter} of {job_size}:")
+                self.progress_window['progress_item'].update(f"{self.browser.current_url.split('?')[0]}")
+        for downloadThread in downloadThreads:
+            downloadThread.join()
+        self.progress_window.close
+        while True:
+            browser = self.browsers.pop()
+            if len(self.browsers) == 1:
+                self.browser=browser
+                break
+            browser.close()
 
     def scrape(self, user_group, browser):
         """
         Uses the supplied browser to gather details from user profile pages.
         """
         browser.implicitly_wait(0)
-        index = 0
-        size = len(list(user_group))
-        window = progress_bar(f"Scraping page {index} of {size}:\n{browser.current_url.split('?')[0]}")
-        for index, user in enumerate(user_group):
+        for user in user_group:
             browser.get(user.url)
+            self.current_page = user.url
+            self.progress_counter += 1
+            print(f"{self.progress_counter=}")
             # GET EMAIL / TWITTER
             at = browser.find_elements_by_partial_link_text("@")
             for result in at:
@@ -164,17 +179,13 @@ class Session(CleverSession):
             span = browser.find_elements_by_tag_name("span")
             user.name = [x.text for x in span if x.get_attribute('itemprop')=="name"][0]
             user.last_updated = get_time()
-            index += 1
-            window['progress'].update(index, size)
-            window['progress_text'].update(f"Scraping page {index} of {size}:\n{browser.current_url.split('?')[0]}")
-        browser.close()
 
 @timer
 def main():
     setattr(Repository, "to_json", to_json)
     self = Session(redirect=False)
     self.login_with_webbrowsers(1)  # Creates self.browsers and 1 browser object
-    self.browser= self.browsers[0]
+    self.browser = self.browsers[0]
     self.loop_through_stargazers()
     self.login_with_webbrowsers(self.max_browsers)
     self.loop_through_profiles(browsers=self.max_browsers)
